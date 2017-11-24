@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+
+
+    <changeSet author="orasio" id="000002">
+        <comment>create table file entity</comment>
+
+
+        <createTable tableName="file_entity">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="file_entity_pkey"/>
+            </column>
+            <column name="version" type="int8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <!--<column name="content_type" type="VARCHAR(255)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <column name="size" type="int8"  />
+
+            <column name="file_data" type="oid"  >
+                <constraints nullable="false"  />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+
+    <changeSet author="orasio" id="20600-09" failOnError="false">
+        <comment>allow all user read oid objects</comment>
+        <sql splitStatements="true">
+            ALTER DATABASE hp4m SET lo_compat_privileges=on;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
